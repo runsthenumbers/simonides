@@ -178,6 +178,36 @@ Stated plainly, so you can decide what to trust it with:
 
 ---
 
+## How is this different from Claude's own memory?
+
+Claude now has a built-in memory: it saves topics about you as you chat (your
+work, the people in your life, your preferences) and brings them into new
+conversations. It is good, it needs no setup, and you may well want both. They
+answer different questions.
+
+| | Claude's built-in memory | Simonides |
+|---|---|---|
+| **Where it is kept** | On Anthropic's servers, tied to your Claude account | On your own computer, in a file only your key opens |
+| **Setup** | None. On by default on Free, Pro and Max | About half an hour, once (see above) |
+| **Which assistants can use it** | Claude: chat, and Cowork when it runs in the cloud | Any assistant that supports MCP: Claude Desktop, Claude Code, Cursor and others |
+| **What it keeps** | Short topics about you and your work | Whatever your assistant files: full notes, word for word, plus links between them, facts with dates (who worked where, and when that stopped being true) and a separate diary for each assistant |
+| **Several assistants** | One memory per account (plus one per project) | One palace that several assistants can share, each with its own diary |
+| **Private areas** | Sensitive topics are left out unless you opt in | You decide, room by room, which notes are kept apart under separate keys (the optional three tiers) |
+| **Looking at and editing it** | A settings page in the Claude app | Through your assistant for now; there is no separate app yet |
+| **Across devices** | Yes, everywhere you sign in | Not yet; one computer |
+| **Cost** | Included with your Claude plan | Free and open source, for good |
+
+Put simply: Claude's memory is the convenient choice and follows you
+everywhere. Simonides is for when you want the memory itself to be yours: kept
+on your machine, readable by any assistant you choose, holding the full record
+rather than a summary, and not dependent on any one company's service.
+
+If you build your own agents: Anthropic also offers a memory tool and hosted
+memory stores for developers. Those leave the storage to you or keep it on
+Anthropic's platform; Simonides is a ready-made local store you can point an
+agent at today.
+---
+
 # For developers
 
 Everything below is technical detail.
