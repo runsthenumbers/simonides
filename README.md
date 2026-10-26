@@ -164,15 +164,20 @@ minute once; after that, everything happens on your computer.
 
 Stated plainly, so you can decide what to trust it with:
 
+- **Encryption is on and working.** Your whole palace (notes, files and search
+  index) is encrypted from the first run, using the key file created at setup.
+  Nothing below changes that.
 - **One computer, one person.** Your palace lives on one machine. Keeping it
   in step across several devices is not available yet; the groundwork is in the
   code but is experimental and not switched on.
 - **The key file is the lock.** It is protected so that other accounts on your
   computer can't read it, but anyone who can log in as you can open your
   palace.
-- **The "vault" tier can't be opened yet.** If you use the optional
-  three-tier setup described below, anything routed to the vault is refused
-  rather than stored, because this version has no way to unlock it.
+- **One optional extra isn't finished: the "vault" tier.** If you turn on the
+  three-tier setup (most people won't need it), the third tier, meant for your
+  most sensitive notes, has no unlock command yet. So instead of saving notes
+  there that nobody could open, Simonides refuses them and tells your assistant
+  why. Your regular palace isn't affected.
 - **No independent security audit** has been done. It has been reviewed and
   tested, but not by an outside security firm.
 

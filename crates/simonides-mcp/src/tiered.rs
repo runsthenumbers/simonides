@@ -261,8 +261,8 @@ impl Tiered {
             }
         }
         Err(format!(
-            "{wing}/{room} belongs to tier {t}, which is not open. \
-             Unlock it and retry — this write will not be redirected to another tier."
+            "{wing}/{room} belongs to tier {t}, which is locked, so nothing was saved. \
+             This version of Simonides cannot unlock that tier, and the note will not be redirected to another tier."
         ))
     }
 
