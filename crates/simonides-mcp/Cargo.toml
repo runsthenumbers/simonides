@@ -1,0 +1,29 @@
+[package]
+name = "simonides-mcp"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "The Simonides MCP server (stdio)."
+
+[dependencies]
+simonides = { path = "../simonides" }
+simonides-core = { path = "../simonides-core" }
+serde_json.workspace = true
+serde.workspace = true
+chrono.workspace = true
+dirs.workspace = true
+rand.workspace = true
+zeroize.workspace = true
+
+[dev-dependencies]
+tempfile.workspace = true
+
+[lib]
+name = "simonides_mcp"
+path = "src/lib.rs"
+
+[[bin]]
+name = "simonides"
+path = "src/main.rs"

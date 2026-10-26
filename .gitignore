@@ -1,0 +1,26 @@
+# Build output
+/target/
+
+# Never commit a store, a key, or a model cache.
+*.db
+*.db-wal
+*.db-shm
+*.db-journal
+*.sqlite
+*.sqlcipher
+key
+key-*
+*.key
+.env
+.env.*
+vault/
+vault-*/
+.fastembed_cache/
+models/
+
+# Editors and OS
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db

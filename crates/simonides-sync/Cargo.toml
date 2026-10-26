@@ -1,0 +1,25 @@
+[package]
+name = "simonides-sync"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "CRDT merge rules for Simonides: Automerge per drawer, LWW set for structure, OR-set for tunnels, bitemporal merge for knowledge-graph facts. Experimental."
+
+[dependencies]
+simonides-core.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+tokio.workspace = true
+async-trait.workspace = true
+tracing.workspace = true
+chrono.workspace = true
+uuid.workspace = true
+thiserror.workspace = true
+
+# CRDT foundation
+automerge = "0.5"
+
+# M6: binary delta encoding
+bincode.workspace = true

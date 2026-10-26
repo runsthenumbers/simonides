@@ -1,0 +1,35 @@
+# Example Simonides tier policy.
+#
+# Turn the three-tier membrane on by pointing SIMONIDES_TIER_POLICY at a file
+# like this one. Each drawer is filed under a wing and a room; the policy says
+# which tier that (wing, room) pair belongs in.
+#
+#   L1  open     the only tier that may ever be served beyond this machine
+#   L2  private  encrypted under a resident key on this machine
+#   L3  vault    starts locked; in this release it cannot be unlocked, so
+#                anything routed to L3 is refused rather than written
+#
+# Rules are checked top to bottom and the FIRST match wins, so put the most
+# specific rules first. Matching ignores case. Anything no rule matches gets
+# `default`, which is L3 if you leave it out: a private note misfiled into an
+# open tier is already exposed, while an over-sealed one is only a nuisance.
+
+# Unmatched drawers are refused (L3 is sealed in this release). Change this to
+# "L2" if you would rather keep anything unmatched private on this machine.
+default = "L3"
+
+# A room called "vault" is sealed no matter which wing it is in.
+[[rule]]
+room = "vault"
+tier = "L3"
+
+# Diaries and personal notes stay on this machine. diary_write files entries in
+# the room "personal-diary", so keep that name here if you use diaries.
+[[rule]]
+room = ["personal-diary", "diary", "personal"]
+tier = "L2"
+
+# Anything in a wing whose name starts with "public_" may be shared.
+[[rule]]
+wing_prefix = "public_"
+tier = "L1"

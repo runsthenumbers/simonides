@@ -1,0 +1,44 @@
+[package]
+name = "simonides"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "The Simonides store: encrypted drawers, hybrid retrieval, knowledge graph and tiers."
+
+[dependencies]
+rusqlite.workspace = true
+fastembed.workspace = true
+# v7 adds Uuid::now_v7() for time-ordered, move-invariant drawer ids.
+uuid = { workspace = true, features = ["v7"] }
+thiserror.workspace = true
+chrono.workspace = true
+tracing.workspace = true
+sha2.workspace = true
+hex.workspace = true
+chacha20poly1305.workspace = true
+rand.workspace = true
+zeroize.workspace = true
+serde_json.workspace = true
+# in-memory KG graph projection (disposable; rebuilt from triples table).
+petgraph = { version = "0.6", default-features = false }
+
+# CRDT sync integration
+simonides-core.workspace = true
+simonides-sync.workspace = true
+# Membrane (tiered, separately keyed databases): Argon2id KDF + ChaCha20-Poly1305
+# key wrapping from simonides-crypto. simonides derives no key material of its
+# own; it consumes what simonides-crypto produces.
+simonides-crypto.workspace = true
+bincode.workspace = true
+serde.workspace = true
+toml.workspace = true
+# in-place edits fold the new content into the drawer's Automerge doc so the
+# edit is a real CRDT op (survives produce_delta → apply_remote_delta), not a
+# bare SQL UPDATE. Same version already resolved via simonides-sync (0.5.12 in lock),
+# and still available to the M6 gate tests that build AM docs directly.
+automerge = "0.5"
+
+[dev-dependencies]
+tempfile.workspace = true

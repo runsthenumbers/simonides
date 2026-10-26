@@ -1,0 +1,21 @@
+[package]
+name = "simonides-crypto"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "Key-custody primitives for Simonides: Argon2id KDF, ChaCha20-Poly1305 key wrap, HKDF-SHA256."
+
+[dependencies]
+simonides-core.workspace = true
+serde.workspace = true
+argon2.workspace = true
+chacha20poly1305.workspace = true
+hkdf.workspace = true
+sha2.workspace = true
+rand.workspace = true
+zeroize.workspace = true
+
+[dev-dependencies]
+serde_json.workspace = true
