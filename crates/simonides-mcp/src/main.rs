@@ -126,7 +126,7 @@ fn main() {
         println!();
         println!("{}", serde_json::to_string_pretty(&block).unwrap());
         println!();
-        println!("For Claude Code:  claude mcp add simonides -- \"{exe}\"");
+        println!("For Claude Code:  claude mcp add --scope user simonides -- \"{exe}\"");
         println!();
         println!("Back up the key file in the home folder. Without it the store cannot be opened.");
         drop(server);

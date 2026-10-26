@@ -190,10 +190,10 @@ work, the people in your life, your preferences) and brings them into new
 conversations. It is good, it needs no setup, and you may well want both. They
 answer different questions.
 
-| | Claude's built-in memory | Simonides |
+| | Claude's built-in memory (October 2026) | Simonides |
 |---|---|---|
 | **Where it is kept** | On Anthropic's servers, tied to your Claude account | On your own computer, in a file only your key opens |
-| **Setup** | None. On by default on Free, Pro and Max | About half an hour, once (see above) |
+| **Setup** | Little or none; Anthropic turns it on by default for some plans | About half an hour, once (see above) |
 | **Which assistants can use it** | Claude: chat, and Cowork when it runs in the cloud | Any assistant that supports MCP: Claude Desktop, Claude Code, Cursor and others |
 | **What it keeps** | Short topics about you and your work | Whatever your assistant files: full notes, word for word, plus links between them, facts with dates (who worked where, and when that stopped being true) and a separate diary for each assistant |
 | **Several assistants** | One memory per account (plus one per project) | One palace that several assistants can share, each with its own diary |
@@ -206,6 +206,10 @@ Put simply: Claude's memory is the convenient choice and follows you
 everywhere. Simonides is for when you want the memory itself to be yours: kept
 on your machine, readable by any assistant you choose, holding the full record
 rather than a summary, and not dependent on any one company's service.
+
+The Claude column summarises Anthropic's own help pages as they stood in October
+2026. Their features and plan details change, so check
+<https://support.claude.com> for the current picture.
 
 If you build your own agents: Anthropic also offers a memory tool and hosted
 memory stores for developers. Those leave the storage to you or keep it on
@@ -335,6 +339,9 @@ leaked, while an over-sealed one is only a nuisance. Start from
 The L2 key is generated into `<home>/key-l2` on first run (or set
 `SIMONIDES_L2_KEY`). There is deliberately no way to give the L3 key through the
 environment; setting `SIMONIDES_L3_KEY` stops the server.
+
+With tiers off (the default), every drawer is labelled `tier=single`: there is
+one store, and nothing is in the vault.
 
 ## Limitations
 

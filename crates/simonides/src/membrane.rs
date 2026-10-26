@@ -359,6 +359,9 @@ pub fn is_attached(conn: &Connection) -> bool {
 // Tiering — which (wing, room) belongs on which side of the membrane
 // ---------------------------------------------------------------------------
 
+/// The label on drawers in a palace with tiers turned off. See [`TierPolicy::untiered`].
+pub const UNTIERED: &str = "single";
+
 /// Restrictiveness ordering: `L1` < `L2` < `L3`.
 ///
 /// Exists so that "is this a downgrade?" is a comparison rather than a pair of
@@ -512,6 +515,18 @@ impl TierPolicy {
     /// No rules; everything is `L3`. The default for a store that was given no policy.
     pub fn fail_safe() -> Self {
         Self { rules: Vec::new(), default: "L3" }
+    }
+
+    /// For a palace with tiers turned off: every drawer is labelled
+    /// [`UNTIERED`] (`tier=single`).
+    ///
+    /// Labelling everyday notes `L3` there would tell a reader they had gone
+    /// into the locked vault. `single` says what is true: there is one store.
+    /// It is not a tier: [`tier_rank`] treats it as maximally restrictive and
+    /// [`is_network_servable`] refuses it, so if this palace is ever merged into
+    /// a tiered one, nothing is exposed until a policy re-labels it.
+    pub fn untiered() -> Self {
+        Self { rules: Vec::new(), default: UNTIERED }
     }
 
     /// Parse a policy from TOML source.
@@ -1008,6 +1023,15 @@ tier = "L2"
         assert!(is_network_servable(p.tier("public", "readme")));
         assert!(!is_network_servable(p.tier("agent_ada", "diary")));
         assert!(!is_network_servable(p.tier("private", "health")));
+    }
+
+    #[test]
+    fn an_untiered_palace_labels_drawers_single_and_never_l3() {
+        let p = TierPolicy::untiered();
+        assert_eq!(p.tag_provenance("agent", "work", "notes"), "agent|tier=single");
+        assert_eq!(p.tag_provenance("x|tier=L1", "work", "notes"), "x|tier=single", "a caller label never survives");
+        assert_eq!(tier_rank(UNTIERED), u8::MAX, "single is not a tier: it ranks as most restrictive");
+        assert!(!is_network_servable(UNTIERED), "single is never network-served");
     }
 
     #[test]

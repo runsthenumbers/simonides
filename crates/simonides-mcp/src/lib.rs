@@ -56,6 +56,9 @@ impl McpServer {
     /// Pre-split: one store, no tiering. Unchanged behaviour.
     pub fn open(db_path: &Path, vault_root: &Path, key: &str) -> Result<Self, String> {
         let store = PalaceStore::open(db_path, vault_root, key).map_err(|e| e.to_string())?;
+        // Tiers are off: label drawers `tier=single`, not the fail-safe `L3`,
+        // which would read as "in the locked vault".
+        store.set_tier_policy(simonides::membrane::TierPolicy::untiered());
         Ok(Self {
             store: std::sync::Arc::new(store),
             tiers: None,
@@ -982,12 +985,12 @@ tier = "L2"
     /// `tier=` segment in it must be replaced by the policy's tier, not kept.
     #[test]
     fn a_caller_supplied_tier_label_is_overridden_by_the_policy() {
-        // Single store: the fail-safe policy says L3 for everything.
+        // Single store: tiers are off, so every drawer is labelled `single`.
         let (s, _tmp) = srv();
         let v = s
             .handle_tool("add_drawer", &json!({"wing":"w","room":"r","content":"c","provenance":"x|tier=L1"}))
             .expect("add");
-        assert_eq!(v["provenance"], "x|tier=L3", "{v}");
+        assert_eq!(v["provenance"], "x|tier=single", "{v}");
 
         // Tiered: an agent_ wing routes to L2; the caller claims L1.
         let d = tempfile::tempdir().expect("tmp");
